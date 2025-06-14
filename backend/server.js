@@ -11,7 +11,7 @@ const PORT=process.env.PORT || 3000;
 const MONGO_URI=process.env.MONGO_URI;
 
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: 'https://todo-list1-virid.vercel.app',
   credentials: true, 
 }));
 

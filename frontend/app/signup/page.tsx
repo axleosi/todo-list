@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 export default function SignUp() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const { setToken, setIsAuthenticated } = useAuth();
   const router = useRouter();
 
@@ -30,7 +31,7 @@ export default function SignUp() {
     { setSubmitting, setErrors }: FormikHelpers<typeof initialValues>
   ) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/user/signup', values);
+      const response = await axios.post(`${API_URL}/api/user/signup`, values);
       const { token } = response.data;
 
       setToken(token);

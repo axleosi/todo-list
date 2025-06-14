@@ -16,6 +16,7 @@ interface TodoDataProps {
 }
 
 const TodoData: React.FC<TodoDataProps> = ({ light }) => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [todo, setTodo] = useState<TodoItem[]>([]);
   const [value, setValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -32,7 +33,7 @@ const TodoData: React.FC<TodoDataProps> = ({ light }) => {
 
   const fetchTodos = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/todo', config);
+      const res = await axios.get(`${API_URL}/api/todo`, config);
       setTodo(res.data);
     } catch (err) {
       console.error('Fetch todos failed:', err);
@@ -43,7 +44,7 @@ const TodoData: React.FC<TodoDataProps> = ({ light }) => {
     if (!value.trim()) return;
     try {
       const res = await axios.post(
-        'http://localhost:3000/api/todo',
+        `${API_URL}/api/todo`,
         { title: value },
         config
       );
@@ -57,7 +58,7 @@ const TodoData: React.FC<TodoDataProps> = ({ light }) => {
   const toggleCompletion = async (id: string, completed: boolean) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/todo/${id}`,
+        `${API_URL}/api/todo/${id}`,
         { completed: !completed },
         config
       );
@@ -71,7 +72,7 @@ const TodoData: React.FC<TodoDataProps> = ({ light }) => {
 
   const deleteTodo = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3000/api/todo/${id}`, config);
+      await axios.delete(`${API_URL}/api/todo/${id}`, config);
       setTodo((prev) => prev.filter((t) => t._id !== id));
     } catch (err) {
       console.error('Delete todo failed:', err);

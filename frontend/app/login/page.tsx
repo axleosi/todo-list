@@ -9,6 +9,7 @@ import { useAuth } from '../context/AppContext';
 import { useState } from 'react';
 
 export default function Login() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const { setToken, setIsAuthenticated } = useAuth();
   const router = useRouter();
   const [formError, setFormError] = useState('');
@@ -31,7 +32,7 @@ export default function Login() {
   ) => {
     setFormError('');
     try {
-      const res = await axios.post('http://localhost:3000/api/user/login', values);
+      const res = await axios.post(`${API_URL}/api/user/login`, values);
       const { token } = res.data;
 
       setToken(token);
