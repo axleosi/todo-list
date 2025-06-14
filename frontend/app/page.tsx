@@ -1,9 +1,7 @@
 'use client'
 import Link from 'next/link';
-import { useAuth } from './context/AppContext';
 
 export default function Home() {
-  const {isAuthenticated}=useAuth()
 
 
   return (
